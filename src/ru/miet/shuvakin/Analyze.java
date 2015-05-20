@@ -12,7 +12,7 @@ public class Analyze {
 
         BufferedReader reader;
         List<String> lines;
-        reader = new BufferedReader(new InputStreamReader(new FileInputStream("myfile.txt"), Charset.defaultCharset()));
+        reader = new BufferedReader(new InputStreamReader(new FileInputStream("myfile"), Charset.defaultCharset()));
         lines = new ArrayList<String>();
         String line;
         while ((line = reader.readLine()) != null) {
@@ -25,5 +25,30 @@ public class Analyze {
             text.append("\n");
         }
         System.out.println(text);
+
+
+        int prilag=0;
+        Pattern pattern = Pattern.compile("ая[ .,!?]|[ыо]е[ .,!?]|[у|ю]ю[ .,!?]|ый|ий");
+        Matcher matcher = pattern.matcher(text);
+        while(matcher.find()){
+            prilag++;
+        }
+
+
+        int glagol=0;
+        pattern = Pattern.compile("[аыуиею]ть[ .,!?]|тся[ .,!?]|ться[ .,!?]");
+        matcher = pattern.matcher(text);
+        while(matcher.find()){
+            glagol++;
+        }
+
+
+        int narechie=0;
+        pattern = Pattern.compile("либо[ .,!?]|нибудь[ .,!?]|нно[ .,!?]");
+        matcher = pattern.matcher(text);
+        while(matcher.find()){
+            narechie++;
+        }
+        System.out.println("Наречий в тексте: "+narechie + "\nГлаголов в тексте: "+glagol+"\nПрилагательных в тексте: "+prilag);
     }
 }
